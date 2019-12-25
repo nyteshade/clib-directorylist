@@ -120,10 +120,15 @@ void ForEachDirEntry(DirEntryList *list, DirEntryIterator iteratorFunction) {
 
 DirEntryList *NewDirectoryList(unsigned int entryCount) {
   DirEntryList *list = calloc(1, sizeof(DirEntryList));
+  int i;
 
   list->count = 0;
   list->allocated = entryCount;
   list->entries = calloc(entryCount, sizeof(DirEntry *));
+
+  for (i = 0; i < entryCount; i++) {
+    list->entries[i] = calloc(1, sizeof(DirEntry));
+  }
 
   return list;
 }
